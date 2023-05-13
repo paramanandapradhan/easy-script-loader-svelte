@@ -1,6 +1,18 @@
 {
 	"name": "@cloudparker/easy-script-loader-svelte",
-	"version": "0.0.1",
+	"version": "1.0.0",
+	"description": "Svelete script loader",
+	"license": "MIT",
+	"author": "cloudparker.com",
+	"keywords": [
+		"js",
+		"javascript",
+		"loader",
+		"watcher"
+	],
+	"repository": "https://github.com/paramanandapradhan/easy-script-loader-svelte",
+	"homepage": "https://cloudparker.com",
+	"main": "./dist/index.js",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
