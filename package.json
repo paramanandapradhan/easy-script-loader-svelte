@@ -1,6 +1,6 @@
 {
 	"name": "@cloudparker/easy-script-loader-svelte",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Svelete script loader",
 	"license": "MIT",
 	"author": "cloudparker.com",

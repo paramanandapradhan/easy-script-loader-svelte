@@ -19,8 +19,8 @@
 <div>
 	<EasyScriptLoader
 		scriptName="Swiper"
-		script="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"
-		style="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+		scriptUrl="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"
+		styleUrl="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
 		on:load={handleSwipperLoad}
 	>
 		<div class="swiper" bind:this={swiperRef}>
