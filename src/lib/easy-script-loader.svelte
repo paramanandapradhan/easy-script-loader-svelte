@@ -7,8 +7,8 @@
 	import { createEventDispatcher, onMount } from 'svelte';
 	import watchWindowValue from '@cloudparker/easy-window-watcher';
 
-	export let scriptUrl: string = '';
-	export let styleUrl: string = '';
+	export let scriptUrl: string | string[] = '';
+	export let styleUrl: string | string[] = '';
 	export let scriptName: string;
 
 	let dispatch = createEventDispatcher();
@@ -23,8 +23,22 @@
 <svelte:head>
 	{#if BROWSER && scriptName}
 		{#if !window[scriptName] && scriptUrl}
-			<script type="text/javascript" src={scriptUrl}></script>
-			{#if styleUrl}
+			{#if Array.isArray(scriptUrl)}
+				{#each scriptUrl as script}
+					{#if scriptUrl}
+						<script type="text/javascript" src={script}></script>
+					{/if}
+				{/each}
+			{:else if scriptUrl}
+				<script type="text/javascript" src={scriptUrl}></script>
+			{/if}
+			{#if Array.isArray(styleUrl)}
+				{#each styleUrl as style}
+					{#if styleUrl}
+						<link href={style} rel="stylesheet" type="text/css" />
+					{/if}
+				{/each}
+			{:else if styleUrl}
 				<link href={styleUrl} rel="stylesheet" type="text/css" />
 			{/if}
 		{/if}
