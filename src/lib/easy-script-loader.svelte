@@ -5,13 +5,17 @@
 <script lang="ts">
 	import { BROWSER } from 'esm-env';
 	import { createEventDispatcher, onMount } from 'svelte';
-	import watchWindowValue from '@cloudparker/easy-window-watcher';
+	import { getValue, watchWindowValue } from '@cloudparker/easy-window-watcher';
 
 	export let scriptUrl: string | string[] = '';
 	export let styleUrl: string | string[] = '';
 	export let scriptName: string;
 
 	let dispatch = createEventDispatcher();
+
+	function checkWindowValue() {
+		return !!getValue(window, scriptName);
+	}
 
 	onMount(() => {
 		watchWindowValue(scriptName).then((value) => {
@@ -22,7 +26,7 @@
 
 <svelte:head>
 	{#if BROWSER && scriptName}
-		{#if !window[scriptName] && scriptUrl}
+		{#if checkWindowValue() && scriptUrl}
 			{#if Array.isArray(scriptUrl)}
 				{#each scriptUrl as script}
 					{#if scriptUrl}
