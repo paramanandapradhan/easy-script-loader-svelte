@@ -10,6 +10,8 @@
 	export let scriptUrl: string | string[] = '';
 	export let styleUrl: string | string[] = '';
 	export let scriptName: string;
+	export let scriptType: string = 'text/javascript';
+	export let styleType: string = 'text/css';
 
 	let dispatch = createEventDispatcher();
 
@@ -30,20 +32,20 @@
 			{#if Array.isArray(scriptUrl)}
 				{#each scriptUrl as script}
 					{#if scriptUrl}
-						<script type="text/javascript" src={script}></script>
+						<script type={scriptType} src={script}></script>
 					{/if}
 				{/each}
 			{:else if scriptUrl}
-				<script type="text/javascript" src={scriptUrl}></script>
+				<script type={scriptType} src={scriptUrl}></script>
 			{/if}
 			{#if Array.isArray(styleUrl)}
 				{#each styleUrl as style}
 					{#if styleUrl}
-						<link href={style} rel="stylesheet" type="text/css" />
+						<link href={style} rel="stylesheet" type={styleType} />
 					{/if}
 				{/each}
 			{:else if styleUrl}
-				<link href={styleUrl} rel="stylesheet" type="text/css" />
+				<link href={styleUrl} rel="stylesheet" type={styleType} />
 			{/if}
 		{/if}
 	{/if}
