@@ -12,7 +12,7 @@
 		styleUrl?: string | string[];
 		scriptType?: string;
 		styleType?: string;
-		onload?: <T>(lib: T) => void;
+		onload?: (lib: any) => void;
 	};
 
 	let {
