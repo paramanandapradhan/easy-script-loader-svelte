@@ -4,19 +4,30 @@
 
 <script lang="ts">
 	import { BROWSER } from 'esm-env';
-	import { createEventDispatcher, onMount } from 'svelte';
 	import { getValue, watchWindowValue } from '@cloudparker/easy-window-watcher';
 
-	export let scriptName: string;
-	export let scriptUrl: string | string[] = '';
-	export let styleUrl: string | string[] = '';
-	export let scriptType: string = 'text/javascript';
-	export let styleType: string = 'text/css';
+	type PropsType = {
+		scriptName: string;
+		scriptUrl?: string | string[];
+		styleUrl?: string | string[];
+		scriptType?: string;
+		styleType?: string;
+		onload?: <T>(lib: T) => void;
+	};
 
-	let dispatch = createEventDispatcher();
+	let {
+		scriptName,
+		scriptUrl = '',
+		styleUrl = '',
+		styleType = 'text/css',
+		scriptType = 'text/javascript',
+		onload
+	}: PropsType = $props();
 
-	let scriptUrls: string[] = [];
-	let styleUrls: string[] = [];
+	let scriptUrls: string[] = $state([]);
+	let styleUrls: string[] = $state([]);
+
+	let isSent: boolean = false;
 
 	function checkWindowValue() {
 		let val = getValue(window, scriptName);
@@ -47,13 +58,17 @@
 		// console.log('prepare', scriptUrls, styleUrls);
 	}
 
-	onMount(() => {
+	$effect(() => {
 		watchWindowValue(scriptName).then((value) => {
-			dispatch('load', value);
+			if (!isSent) {
+				onload && onload(value);
+			}
 		});
 	});
 
-	$: prepare(scriptUrl, styleUrl);
+	$effect(() => {
+		prepare(scriptUrl, styleUrl);
+	});
 </script>
 
 <svelte:head>
@@ -69,4 +84,3 @@
 		{/if}
 	{/if}
 </svelte:head>
-<!-- <slot /> -->
