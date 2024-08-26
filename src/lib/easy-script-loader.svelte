@@ -1,10 +1,9 @@
 <script lang="ts" context="module">
-	declare var window: any;
+ 
 </script>
 
 <script lang="ts">
-	import { BROWSER } from 'esm-env';
-	import { getValue, watchWindowValue } from '@cloudparker/easy-window-watcher';
+	import { watchWindowValue } from '@cloudparker/easy-window-watcher';
 
 	type PropsType = {
 		scriptName: string;
