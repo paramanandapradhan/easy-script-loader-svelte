@@ -8,79 +8,53 @@
 
 	type PropsType = {
 		scriptName: string;
-		scriptUrl?: string | string[];
-		styleUrl?: string | string[];
+		scriptUrl?: string;
+		styleUrl?: string;
+		scriptUrls?: string[];
+		styleUrls?: string[];
 		scriptType?: string;
 		styleType?: string;
-		onload?: (lib: any) => void;
+		onLoad?: (lib: any) => void;
 	};
 
 	let {
 		scriptName,
 		scriptUrl = '',
 		styleUrl = '',
+		scriptUrls = [],
+		styleUrls = [],
 		styleType = 'text/css',
 		scriptType = 'text/javascript',
-		onload
+		onLoad
 	}: PropsType = $props();
 
-	let scriptUrls: string[] = $state([]);
-	let styleUrls: string[] = $state([]);
-
-	let isSent: boolean = false;
-
-	function checkWindowValue() {
-		let val = getValue(window, scriptName);
-		return !!val;
-	}
-
-	function prepare(scriptUrl: string | string[], styleUrl: string | string[]) {
-		if (scriptUrl) {
-			if (Array.isArray(scriptUrl)) {
-				scriptUrls = scriptUrl || [];
-			} else {
-				scriptUrls = [scriptUrl];
-			}
-		} else {
-			scriptUrls = [];
-		}
-
-		if (styleUrl) {
-			if (Array.isArray(styleUrl)) {
-				styleUrls = styleUrl || [];
-			} else {
-				styleUrls = [styleUrl];
-			}
-		} else {
-			styleUrls = [];
-		}
-
-		// console.log('prepare', scriptUrls, styleUrls);
-	}
+	let isSent: boolean = $state(false);
 
 	$effect(() => {
 		watchWindowValue(scriptName).then((value) => {
 			if (!isSent) {
-				onload && onload(value);
+				// console.log('watchWindowValue', value);
+				onLoad && onLoad(value);
 			}
 		});
-	});
-
-	$effect(() => {
-		prepare(scriptUrl, styleUrl);
 	});
 </script>
 
 <svelte:head>
-	{#if BROWSER && scriptName}
-		{#if !checkWindowValue()}
-			{#each scriptUrls as script}
-				<script src={script} type={scriptType}></script>
-			{/each}
-
-			{#each styleUrls as style}
-				<link href={style} rel="stylesheet" type={styleType} />
-			{/each}
-		{/if}
+	{#if scriptUrl}
+		<script src={scriptUrl} type={scriptType}></script>
+	{/if}
+	{#if styleUrl}
+		<link href={styleUrl} rel="stylesheet" type={styleType} />
+	{/if}
+	{#if scriptUrls?.length}
+		{#each scriptUrls as scriptUrl}
+			<script src={scriptUrl} type={scriptType}></script>
+		{/each}
+	{/if}
+	{#if styleUrls?.length}
+		{#each styleUrls as styleUrl}
+			<link href={styleUrl} rel="stylesheet" type={styleType} />
+		{/each}
 	{/if}
 </svelte:head>

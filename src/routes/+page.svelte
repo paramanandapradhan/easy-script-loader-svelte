@@ -3,8 +3,9 @@
 
 	let swiperRef: HTMLDivElement;
 
-	function handleSwipperLoad(ev: CustomEvent) {
-		let Swiper: any = ev.detail;
+	function handleSwipperLoad(lib: any) {
+		let Swiper: any = lib;
+		console.log(Swiper)
 		const swiper = new Swiper(swiperRef, {
 			slidesPerView: 3,
 			spaceBetween: 8,
@@ -19,9 +20,9 @@
 <div>
 	<EasyScriptLoader
 		scriptName="Swiper"
-		scriptUrl="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"
-		styleUrl="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
-		on:load={handleSwipperLoad}
+		scriptUrls={["https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"]}
+		styleUrls={["https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"]}
+		onLoad={handleSwipperLoad}
 	></EasyScriptLoader>
 
 	<div class="swiper" bind:this={swiperRef}>

@@ -16,7 +16,7 @@ npm i @cloudparker/easy-script-loader-svelte --save-dev
 
 ```ts
 <script lang="ts">
-	import EasyScriptLoader from '@cloudparker/easy-script-loader.svelte';
+	import EasyScriptLoader from '@cloudparker/easy-script-loader-svelte';
 
 	let swiperRef: HTMLDivElement;
 
@@ -33,28 +33,29 @@ npm i @cloudparker/easy-script-loader-svelte --save-dev
 	}
 </script>
 
+
 <div>
 	<EasyScriptLoader
 		scriptName="Swiper"
-		scriptUrl="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"
-		styleUrl="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
-		on:load={handleSwipperLoad}
-	>
-		<div class="swiper" bind:this={swiperRef}>
-			<div class="swiper-wrapper">
-				<div class="swiper-slide">Slide 1</div>
-				<div class="swiper-slide">Slide 2</div>
-				<div class="swiper-slide">Slide 3</div>
-				<div class="swiper-slide">Slide 4</div>
-				<div class="swiper-slide">Slide 5</div>
-				<div class="swiper-slide">Slide 6</div>
-				<div class="swiper-slide">Slide 7</div>
-				<div class="swiper-slide">Slide 8</div>
-				<div class="swiper-slide">Slide 9</div>
-				<div class="swiper-slide">Slide 10</div>
-			</div>
+		scriptUrls={["https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"]}
+		styleUrls={["https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"]}
+		onLoad={handleSwipperLoad}
+	></EasyScriptLoader>
+
+	<div class="swiper" bind:this={swiperRef}>
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">Slide 1</div>
+			<div class="swiper-slide">Slide 2</div>
+			<div class="swiper-slide">Slide 3</div>
+			<div class="swiper-slide">Slide 4</div>
+			<div class="swiper-slide">Slide 5</div>
+			<div class="swiper-slide">Slide 6</div>
+			<div class="swiper-slide">Slide 7</div>
+			<div class="swiper-slide">Slide 8</div>
+			<div class="swiper-slide">Slide 9</div>
+			<div class="swiper-slide">Slide 10</div>
 		</div>
-	</EasyScriptLoader>
+	</div>
 </div>
 
 <style>
