@@ -5,7 +5,7 @@
 
 	function handleSwipperLoad(lib: any) {
 		let Swiper: any = lib;
-		console.log(Swiper)
+		console.log('Swiper = ', Swiper);
 		const swiper = new Swiper(swiperRef, {
 			slidesPerView: 3,
 			spaceBetween: 8,
@@ -18,13 +18,6 @@
 </script>
 
 <div>
-	<EasyScriptLoader
-		scriptName="Swiper"
-		scriptUrls={["https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"]}
-		styleUrls={["https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"]}
-		onLoad={handleSwipperLoad}
-	></EasyScriptLoader>
-
 	<div class="swiper" bind:this={swiperRef}>
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">Slide 1</div>
@@ -36,10 +29,17 @@
 			<div class="swiper-slide">Slide 7</div>
 			<div class="swiper-slide">Slide 8</div>
 			<div class="swiper-slide">Slide 9</div>
-			<div class="swiper-slide">Slide 10</div>
+			<div class="swiper-slide">Slide 101</div>
 		</div>
 	</div>
 </div>
+
+<EasyScriptLoader
+	scriptName="Swiper"
+	scriptUrl={['https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js']}
+	styleUrl={['https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css']}
+	onLoad={handleSwipperLoad}
+></EasyScriptLoader>
 
 <style>
 	.swiper {

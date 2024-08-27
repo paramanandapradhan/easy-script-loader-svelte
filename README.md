@@ -37,8 +37,8 @@ npm i @cloudparker/easy-script-loader-svelte --save-dev
 <div>
 	<EasyScriptLoader
 		scriptName="Swiper"
-		scriptUrls={["https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"]}
-		styleUrls={["https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"]}
+		scriptUrl="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"
+		styleUrl="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
 		onLoad={handleSwipperLoad}
 	></EasyScriptLoader>
 
