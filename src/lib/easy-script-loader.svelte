@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getValue } from '@cloudparker/easy-window-watcher';
 	import { BROWSER } from 'esm-env';
-	type PropsType = {
+	type Props = {
 		scriptUrl?: string | string[];
 		styleUrl?: string | string[];
 		scriptType?: string;
@@ -16,7 +16,7 @@
 		scriptType = 'text/javascript',
 		scriptName,
 		onLoad
-	}: PropsType = $props();
+	}: Props = $props();
 
 	let isCreated: boolean = $state(false);
 	let lib: any = $state(null);
@@ -78,7 +78,7 @@
 				}
 			}
 
-			console.log('Last', { window, scriptName });
+			// console.log('Last', { window, scriptName });
 			lib = getValue(window, scriptName);
 			if (lib) {
 				onLoad && onLoad(lib);
